@@ -5,14 +5,18 @@ export const createEvent = mutation({
   args: {
     title: v.string(),
     date: v.string(),
+    image: v.string(),
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
+
     if (!user) throw new Error("Not logged in");
-    await ctx.db.insert("events", {
+
+    return await ctx.db.insert("events", {
       title: args.title,
       date: args.date,
       userId: user.subject,
+      image: args.image,
     });
   },
 });

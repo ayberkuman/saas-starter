@@ -9,30 +9,6 @@ export default function Home() {
   const events = useQuery(api.events.getEventsForUser);
   return (
     <div>
-      {isSignedIn ? <SignOutButton /> : <SignInButton />}
-      {isSignedIn && (
-        <form
-          onSubmit={async (e) => {
-            e.preventDefault();
-            const form = e.target as HTMLFormElement;
-            const formData = new FormData(form);
-            const title = formData.get("title") as string;
-            const date = formData.get("date") as string;
-            await createEvent({
-              title,
-              date,
-            });
-            form.reset();
-          }}
-        >
-          <label>Event Title</label>
-          <input className="text-black" name="title" />
-          <label>Event Date</label>
-          <input name="date" type="date" />
-
-          <button type="submit">submit</button>
-        </form>
-      )}
       {events?.map((event) => (
         <div key={event._id}>
           <h1>{event.title}</h1>
