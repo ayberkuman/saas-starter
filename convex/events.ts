@@ -17,6 +17,8 @@ export const createEvent = mutation({
       date: args.date,
       userId: user.subject,
       image: args.image,
+      goingCount: 0,
+      participants: [],
     });
   },
 });
@@ -34,5 +36,35 @@ export const getEventsForUser = query({
       .query("events")
       .filter((q) => q.eq(q.field("userId"), user.subject))
       .collect();
+  },
+});
+
+export const getEvent = query({
+  args: { eventId: v.id("events") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.eventId);
+  },
+});
+
+export const goToEvent = mutation({
+  args: {
+    eventId: v.id("events"),
+  },
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+
+    if (!user) throw new Error("Not logged in");
+
+    const event = await ctx.db.get(args.eventId);
+    if (!event) throw new Error("Event not found");
+
+    if (event.participants.includes(user.subject)) {
+     throw new Error("Already going");
+    }
+
+    await ctx.db.patch(event._id, {
+      goingCount: event.goingCount + 1,
+      participants: [...event.participants, user.subject],
+    });
   },
 });

@@ -58,7 +58,7 @@ export default function Create() {
         )}
         <UploadButton
           uploadUrl={generateUploadUrl}
-          fileTypes={[".pdf", "image/*"]}
+          fileTypes={["image/*"]}
           onUploadComplete={async (uploaded: UploadFileResponse[]) => {
             setUploadedImage((uploaded[0].response as any).storageId);
           }}

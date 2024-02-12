@@ -2,6 +2,7 @@
 import { SignInButton, SignOutButton, useSession } from "@clerk/nextjs";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import Link from "next/link";
 
 export default function Home() {
   const { isSignedIn } = useSession();
@@ -10,10 +11,13 @@ export default function Home() {
   return (
     <div>
       {events?.map((event) => (
-        <div key={event._id}>
+        <Link href={
+          `/events/${event._id}`
+       
+        } key={event._id}>
           <h1>{event.title}</h1>
           <p>{event.date}</p>
-        </div>
+        </Link>
       ))}
     </div>
   );

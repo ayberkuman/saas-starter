@@ -6,6 +6,8 @@ export default defineSchema({
     date: v.string(),
     title: v.string(),
     userId: v.string(),
-    image : v.string(),
+    image: v.string(),
+    goingCount: v.number(),
+    participants: v.array(v.string()),
   }),
 });
