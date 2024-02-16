@@ -6,6 +6,7 @@ export const createEvent = mutation({
     title: v.string(),
     date: v.string(),
     image: v.string(),
+    participantLimit: v.number(),
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
@@ -19,6 +20,7 @@ export const createEvent = mutation({
       image: args.image,
       goingCount: 0,
       participants: [],
+      participantLimit: args.participantLimit,
     });
   },
 });
@@ -59,7 +61,7 @@ export const goToEvent = mutation({
     if (!event) throw new Error("Event not found");
 
     if (event.participants.includes(user.subject)) {
-     throw new Error("Already going");
+      throw new Error("Already going");
     }
 
     await ctx.db.patch(event._id, {

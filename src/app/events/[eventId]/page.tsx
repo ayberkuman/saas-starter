@@ -7,6 +7,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@clerk/nextjs";
+import { Progress } from "@/components/ui/progress";
 
 export default function Page() {
   const params = useParams<{ eventId: Id<"events"> }>();
@@ -19,18 +20,20 @@ export default function Page() {
     return <div>Loading...</div>;
   }
 
+  const eventProgress =
+    (event.participants.length / event.participantLimit) * 100;
+
   const isGoing = event?.participants.includes(session.session.user.id);
-  console.log(isGoing);
-  console.log(session.session.user.id, event?.participants);
   return (
     <div>
       <div>{event.title}</div>
-      {/*  <Image
+      <Progress value={eventProgress} className="w-1/2" />
+      { <Image
         width={200}
         height={200}
         src={`${process.env.NEXT_PUBLIC_CONVEX_URL}/api/storage/${event?.image}`}
         alt="Uploaded Image"
-      /> */}
+      />}
       <div>{event?.date}</div>
       {isGoing ? (
         <div>alread going</div>

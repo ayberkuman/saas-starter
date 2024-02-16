@@ -9,5 +9,6 @@ export default defineSchema({
     image: v.string(),
     goingCount: v.number(),
     participants: v.array(v.string()),
+    participantLimit: v.number(),
   }),
 });

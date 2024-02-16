@@ -29,7 +29,8 @@ export default function Create() {
           const form = e.target as HTMLFormElement;
           const formData = new FormData(form);
           const title = formData.get("title") as string;
-          if (!date || !title || !uploadedImage) {
+          const participantLimit = Number(formData.get("participantLimit"));
+          if (!date || !title || !uploadedImage || !participantLimit) {
             toast({
               title: "Error",
               description: "Please fill out all fields",
@@ -41,12 +42,18 @@ export default function Create() {
             title,
             date: format(date, "yyyy-MM-dd"),
             image: uploadedImage,
+            participantLimit,
           });
           router.push(`/events/${eventId}`);
         }}
       >
         <DatePicker date={date} setDate={setDate} />
         <Input placeholder="Event Title" name="title" />
+        <Input
+          placeholder="Participant Limit"
+          name="participantLimit"
+          type="number"
+        />
 
         {uploadedImage && (
           <Image
