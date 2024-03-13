@@ -40,7 +40,7 @@ export default function Header() {
             <UserButton />
           </SignedIn>
           <SignedOut>
-            <SignInButton>
+            <SignInButton afterSignInUrl="/dashboard">
               <Button variant="secondary">Sign In</Button>
             </SignInButton>
           </SignedOut>

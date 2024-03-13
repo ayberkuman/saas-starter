@@ -5,10 +5,8 @@ export default defineSchema({
   events: defineTable({
     date: v.string(),
     title: v.string(),
+    description: v.string(),
     userId: v.string(),
     image: v.string(),
-    goingCount: v.number(),
-    participants: v.array(v.string()),
-    participantLimit: v.number(),
   }),
 });

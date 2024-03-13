@@ -6,7 +6,7 @@ export const createEvent = mutation({
     title: v.string(),
     date: v.string(),
     image: v.string(),
-    participantLimit: v.number(),
+    description: v.string(),
   },
   handler: async (ctx, args) => {
     const user = await ctx.auth.getUserIdentity();
@@ -15,12 +15,10 @@ export const createEvent = mutation({
 
     return await ctx.db.insert("events", {
       title: args.title,
+      description: args.description,
       date: args.date,
       userId: user.subject,
       image: args.image,
-      goingCount: 0,
-      participants: [],
-      participantLimit: args.participantLimit,
     });
   },
 });
@@ -48,7 +46,7 @@ export const getEvent = query({
   },
 });
 
-export const goToEvent = mutation({
+/* export const goToEvent = mutation({
   args: {
     eventId: v.id("events"),
   },
@@ -69,4 +67,4 @@ export const goToEvent = mutation({
       participants: [...event.participants, user.subject],
     });
   },
-});
+}); */
