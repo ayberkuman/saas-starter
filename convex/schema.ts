@@ -9,4 +9,10 @@ export default defineSchema({
     userId: v.string(),
     image: v.string(),
   }),
+  users: defineTable({
+    name: v.string(),
+    email : v.string(),
+    profileImage: v.string(),
+    tokenIdentifier: v.string(),
+  }).index("by_token", ["tokenIdentifier"]),
 });

@@ -48,7 +48,7 @@ const FormSchema = z.object({
   }),
 });
 
-export default function DatePickerForm() {
+export default function Create() {
   const [uploadedImage, setUploadedImage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 

@@ -46,6 +46,26 @@ export const getEvent = query({
   },
 });
 
+export const getAllEvents = query({
+  args: {},
+  handler: async (ctx, args) => {
+    const user = await ctx.auth.getUserIdentity();
+    if (!user) {
+      return [];
+    }
+    return await ctx.db.query("events").collect();
+  },
+});
+
+/* export const getUser = query({
+  args: {
+    id: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
+    
+  },
+}); */
 /* export const goToEvent = mutation({
   args: {
     eventId: v.id("events"),
