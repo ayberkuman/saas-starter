@@ -7,6 +7,8 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { Calendar } from "@/components/ui/calendar";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export default function Page() {
   const params = useParams<{ eventId: Id<"events"> }>();
@@ -19,19 +21,10 @@ export default function Page() {
   }
 
   return (
+  <MaxWidthWrapper>
     <div>
-      <div>{event.title}</div>
-      {
-        <Image
-          width={200}
-          height={200}
-          src={`${process.env.NEXT_PUBLIC_CONVEX_URL}/api/storage/${event?.image}`}
-          alt="Uploaded Image"
-        />
-      }
-      <div>{event?.date}</div>
-
-      <Button>Apply</Button>
+      
     </div>
+  </MaxWidthWrapper>
   );
 }

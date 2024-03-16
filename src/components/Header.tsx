@@ -15,14 +15,26 @@ export default function Header() {
   return (
     <div className="border-b">
       <div className="container flex justify-between items-center h-16">
-        <Link
-          href="/"
-          className={buttonVariants({
-            variant: "link",
-          })}
-        >
-          My Saas
-        </Link>
+        <SignedIn>
+          <Link
+            href="/dashboard"
+            className={buttonVariants({
+              variant: "link",
+            })}
+          >
+            Ayberk&apos;s List
+          </Link>
+        </SignedIn>
+        <SignedOut>
+          <Link
+            href="/"
+            className={buttonVariants({
+              variant: "link",
+            })}
+          >
+           Ayberk&apos;s List
+          </Link>
+        </SignedOut>
         <div>
           <SignedIn>
             <Link
